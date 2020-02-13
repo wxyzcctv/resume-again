@@ -85,11 +85,11 @@ a{
     /* 设置背景图的上面的div的透明度进行遮住 */
 }
 .userCard{
-    border: 1px solid red;
     background-color: #ffffff;
     max-width: 940px;
     margin-left: auto;
     margin-right: auto;/*块级元素水平居中是通过margin-left和margin-right为auto得到*/
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.7);
 }
 .userCard .welcome{
     background: #e6686a;
@@ -111,7 +111,7 @@ a{
     top: 100%;
 }
 .userCard .pictureAndText{
-    margin:50px;
+    padding:50px;
 }
 
 .userCard .pictureAndText .picture{
@@ -156,9 +156,40 @@ a{
 .userCard>footer.media a:hover{
     background: #cf5d5f;
 }
-.userCard>footer.media svg{
+.userCard>footer.media a svg{
     width: 30px;
     height: 30px;
     fill: white;
     vertical-align: top;
+}
+body > main{
+    margin-top:-340px;
+}
+body > main .downloadResumeWrapper{
+    text-align: center;
+}
+body > main .downloadResume{
+    font-size: 16px;
+    border: 1px solid #cdcfd1;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 16px;
+    padding: 21px 55px;
+    background: #efefef;
+    color: #3d4451;
+    font-weight: bold;
+    margin: 32px 0;
+    transition: box-shadow 0.2s;
+}
+body > main .downloadResume:hover{
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.7);
+}
+.selfIntroduction{
+    max-width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: kai;
+    line-height: 1.8;
+    font-size: 18px;
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./a.css">
+    <link rel="stylesheet" href="./loading.css">
     <script src="//at.alicdn.com/t/font_881797_9ahi3eg5y0k.js"></script>
     <style type="text/css">
         .icon {
@@ -12,10 +13,25 @@
            fill: currentColor;
            overflow: hidden;
         }
+        .set-welcome{
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #888;
+            z-index: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        .set-welcome.active{
+            display: flex;
+        }
     </style>
     <title>个人简历</title>
 </head>
 <body>
+    <div id="setWelcome" class="set-welcome active">
+        <div class="loading"></div>
+    </div>
     <div class="topNavBar">
         <div class="topNavBar-inner clearfix">
             <a class="logo" href="#" alt="logo">
@@ -158,13 +174,23 @@
                 console.log(789)
             }
         </script>
-        <div class="jobs">
-            <div class="big"></div>
-            <div class="samll"></div>
-            <div class="samll"></div>
+        <div class="works" style="height: 597px">
+            <div class="big" style="top: 0; left: 0;">
+                <img src="./img/1.jpg" alt="作品1">
+            </div>
+            <div class="small" style="top: 0; left: 645px;">
+                <img src="./img/2.jpg" alt="作品2">
+            </div>
+            <div class="small" style="top: 312px; left: 645px;">
+                <img src="./img/2.jpg" alt="作品3">
+            </div>
         </div>
     </section>
-
+<script>
+    setTimeout(function(){
+        setWelcome.classList.remove('active')
+    },1000)
+</script>
     
 </body>
 </html>

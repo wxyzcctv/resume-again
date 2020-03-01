@@ -22,9 +22,13 @@ a{ text-decoration: none; color: inherit; }
     display: none;
     position: absolute;
     right: 0;
+    cursor: pointer;
     background: white;
     color: #3d4451;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.topNavBar .subMenu li{
+    padding: 5px 10px;
 }
 .topNavBar li.active .subMenu{
     display: block;

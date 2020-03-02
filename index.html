@@ -221,6 +221,8 @@
             x.currentTarget.classList.remove('active')
         }
     }
+
+    // 点击导航栏中的按钮的时候，页面自动跳转到对应的内容部分
     let aTags = document.querySelectorAll('nav.menu > ul > li > a')
     for(let i = 0; i < aTags.length; i++){
         aTags[i].onclick = function(x){
@@ -228,7 +230,22 @@
             let a = x.currentTarget
             let href = a.getAttribute('href')
             let currentA = document.querySelector(href)
-            window.scrollTo(0, currentA.offsetTop - 80)
+
+            // 通过js实现慢慢的移动
+            let number = 25 //移动的步数
+            let moveTime = 500 / number //总共0.5秒，移动25步，每步移动的时间
+            let currentTop = window.scrollY
+            let targetTop = currentA.offsetTop - 80
+            let moveStep = (targetTop - currentTop)/number
+            let i = 0
+            let id = setInterval(()=>{
+                if(i===25){
+                    window.clearInterval(id)
+                    return
+                }
+                i = i + 1
+                window.scrollTo(0,currentTop + moveStep * i)
+            },moveTime)
         }
     }
 </script>

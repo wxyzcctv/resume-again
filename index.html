@@ -249,7 +249,7 @@
             const coords = { y: currentTop }; 
             const tween = new TWEEN.Tween(coords) 
                     .to({ y: targetTop }, time) 
-                    .easing(TWEEN.Easing.Quadratic.Out) 
+                    .easing(TWEEN.Easing.Quadratic.InOut) 
                     .onUpdate(() => { 
                         window.scrollTo(0,coords.y)
                     })

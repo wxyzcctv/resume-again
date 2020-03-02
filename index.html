@@ -200,6 +200,7 @@
             </div>
         </div>
     </section>
+    <script src="https://cdn.bootcss.com/tween.js/17.2.0/Tween.min.js"></script>
 <script>
     setTimeout(function(){
         setWelcome.classList.remove('active')
@@ -221,7 +222,11 @@
             x.currentTarget.classList.remove('active')
         }
     }
-
+    function animate(time) {
+                requestAnimationFrame(animate);
+                TWEEN.update(time);
+            }
+    requestAnimationFrame(animate);
     // 点击导航栏中的按钮的时候，页面自动跳转到对应的内容部分
     let aTags = document.querySelectorAll('nav.menu > ul > li > a')
     for(let i = 0; i < aTags.length; i++){
@@ -231,21 +236,24 @@
             let href = a.getAttribute('href')
             let currentA = document.querySelector(href)
 
-            // 通过js实现慢慢的移动
-            let number = 25 //移动的步数
-            let moveTime = 500 / number //总共0.5秒，移动25步，每步移动的时间
+            // 通过js实现慢慢的移动(下面是通过引入了一个tween库来进行缓动)
             let currentTop = window.scrollY
             let targetTop = currentA.offsetTop - 80
-            let moveStep = (targetTop - currentTop)/number
-            let i = 0
-            let id = setInterval(()=>{
-                if(i===25){
-                    window.clearInterval(id)
-                    return
-                }
-                i = i + 1
-                window.scrollTo(0,currentTop + moveStep * i)
-            },moveTime)
+
+            // 下面是设置运动的时间是根据距离的改变而发生改变的
+            // 没100像素移动的时间是300ms，当总的运动时间大于500ms时就设置为500ms
+            let distance = targetTop - currentTop
+            let time = Math.abs((distance/100)*300)
+            if(time>500){ time = 500 }
+
+            const coords = { y: currentTop }; 
+            const tween = new TWEEN.Tween(coords) 
+                    .to({ y: targetTop }, time) 
+                    .easing(TWEEN.Easing.Quadratic.Out) 
+                    .onUpdate(() => { 
+                        window.scrollTo(0,coords.y)
+                    })
+                    .start();
         }
     }
 </script>

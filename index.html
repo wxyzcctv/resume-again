@@ -29,9 +29,9 @@
     <title>个人简历</title>
 </head>
 <body>
-    <div id="setWelcome" class="set-welcome active">
+    <!-- <div id="setWelcome" class="set-welcome active">
         <div class="loading"></div>
-    </div>
+    </div> -->
     <div id="topNavBar" class="topNavBar">
         <div class="topNavBar-inner clearfix">
             <a class="logo" href="#" alt="logo">
@@ -68,7 +68,7 @@
         <div class="mask"></div>
     </div>
     <main>
-        <div id="siteAbout" class="userCard">
+        <div data-x id="siteAbout" class="userCard">
              <div class="pictureAndText clearfix">
                 <div class="picture">
                     <img src="./img/avatar.jpg" alt="头像">
@@ -121,7 +121,7 @@
             技能：前端开发，Rails 开发，Node.js 开发
         </p>
     </main>
-    <section id="siteSkills" class="skills">
+    <section data-x id="siteSkills" class="skills">
         <h2>技能</h2>
         <ol class="clearfix">
             <li>
@@ -162,7 +162,7 @@
             </li>
         </ol>
     </section>
-    <section id="siteWorks" class="portfolio">
+    <section data-x id="siteWorks" class="portfolio">
         <h2>作品集</h2>
         <nav>
             <ol class="clearfix">
@@ -202,15 +202,48 @@
     </section>
     <script src="https://cdn.bootcss.com/tween.js/17.2.0/Tween.min.js"></script>
 <script>
-    setTimeout(function(){
-        setWelcome.classList.remove('active')
-    },1000)
-    window.onscroll = function(xxx){
+    // setTimeout(function(){
+    //     setWelcome.classList.remove('active')
+    // },50)
+    let specialTags = document.querySelectorAll('[data-x]')
+    for(let i = 0;i<specialTags.length;i++){
+        specialTags[i].classList.add('offset')
+    }
+    setTimeout(()=>{
+        findClose()
+    },200)
+    window.onscroll = function(x){
         if(window.scrollY > 0){
             topNavBar.classList.add('sticky')
         }else{
             topNavBar.classList.remove('sticky')
         }
+        findClose()
+    }
+    function findClose(){
+        // 如下这段是找到距离导航栏最近的一个区域
+        let minit = 0
+        let specialTags = document.querySelectorAll('[data-x]')
+        for(let i = 1;i<specialTags.length;i++){
+            if(Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minit].offsetTop - window.scrollY)){
+                minit = i
+            }
+        }
+        specialTags[minit].classList.remove('offset')
+
+        for(let i = 0;i<specialTags.length;i++){
+            specialTags[i].classList.remove('active')
+        }
+        // 滑动页面，将页面对应的内容与导航栏上的内容对应起来
+        let id = specialTags[minit].id
+        let a = document.querySelector('a[href="#' + id +'"]')
+        let li = a.parentNode
+
+        let liGroup = li.parentNode.children
+        for(let i = 0;i<liGroup.length;i++){
+            liGroup[i].classList.remove('highlight')
+        }
+        li.classList.add('highlight')
     }
     let liTags = document.querySelectorAll('nav.menu > ul > li')
     // 通过选择器获取所有的元素

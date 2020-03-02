@@ -29,9 +29,6 @@
     <title>个人简历</title>
 </head>
 <body>
-    <!-- <div id="setWelcome" class="set-welcome active">
-        <div class="loading"></div>
-    </div> -->
     <div id="topNavBar" class="topNavBar">
         <div class="topNavBar-inner clearfix">
             <a class="logo" href="#" alt="logo">
@@ -202,16 +199,14 @@
     </section>
     <script src="https://cdn.bootcss.com/tween.js/17.2.0/Tween.min.js"></script>
 <script>
-    // setTimeout(function(){
-    //     setWelcome.classList.remove('active')
-    // },50)
     let specialTags = document.querySelectorAll('[data-x]')
     for(let i = 0;i<specialTags.length;i++){
         specialTags[i].classList.add('offset')
     }
     setTimeout(()=>{
         findClose()
-    },200)
+    },300)
+
     window.onscroll = function(x){
         if(window.scrollY > 0){
             topNavBar.classList.add('sticky')

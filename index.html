@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="./loading.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
     <link rel="stylesheet" href="./a.css">
     <script src="//at.alicdn.com/t/font_881797_9ahi3eg5y0k.js"></script>
-    <style type="text/css">
-        .icon { width: 1em; height: 1em; vertical-align: -0.15em; fill: currentColor; overflow: hidden; }
-        .set-welcome{ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #888; z-index: 2; justify-content: center; align-items: center; }
-        .set-welcome.active{ display: flex; }
-    </style>
     <title>个人简历</title>
 </head>
 <body>
@@ -150,7 +144,6 @@
     </section>
     <section data-x id="siteWorks" class="portfolio">
         <h2>作品集</h2>
-
         <!-- Slider main container -->
         <div class="swiper-container">
             <!-- Additional required wrapper -->
@@ -168,110 +161,10 @@
     </section>
     <script src="https://cdn.bootcss.com/tween.js/17.2.0/Tween.min.js"></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-    <script>
-          var mySwiper = new Swiper ('.swiper-container', {
-            // Optional parameters
-            loop: true,
-
-            // If we need pagination
-            pagination: {
-            el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            }
-        })
-    </script>
-<script>
-    let specialTags = document.querySelectorAll('[data-x]')
-    for(let i = 0;i<specialTags.length;i++){
-        specialTags[i].classList.add('offset')
-    }
-    setTimeout(()=>{
-        findClose()
-    },300)
-
-    window.onscroll = function(x){
-        if(window.scrollY > 0){
-            topNavBar.classList.add('sticky')
-        }else{
-            topNavBar.classList.remove('sticky')
-        }
-        findClose()
-    }
-    function findClose(){
-        // 如下这段是找到距离导航栏最近的一个区域
-        let minit = 0
-        let specialTags = document.querySelectorAll('[data-x]')
-        for(let i = 1;i<specialTags.length;i++){
-            if(Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minit].offsetTop - window.scrollY)){
-                minit = i
-            }
-        }
-        specialTags[minit].classList.remove('offset')
-
-        for(let i = 0;i<specialTags.length;i++){
-            specialTags[i].classList.remove('active')
-        }
-        // 滑动页面，将页面对应的内容与导航栏上的内容对应起来
-        let id = specialTags[minit].id
-        let a = document.querySelector('a[href="#' + id +'"]')
-        let li = a.parentNode
-
-        let liGroup = li.parentNode.children
-        for(let i = 0;i<liGroup.length;i++){
-            liGroup[i].classList.remove('highlight')
-        }
-        li.classList.add('highlight')
-    }
-    let liTags = document.querySelectorAll('nav.menu > ul > li')
-    // 通过选择器获取所有的元素
-    for(let i = 0; i < liTags.length; i++){
-        liTags[i].onmouseenter = function(x){
-            x.currentTarget.classList.add('active')
-        }
-        liTags[i].onmouseleave = function(x){
-            x.currentTarget.classList.remove('active')
-        }
-    }
-    function animate(time) {
-                requestAnimationFrame(animate);
-                TWEEN.update(time);
-            }
-    requestAnimationFrame(animate);
-    // 点击导航栏中的按钮的时候，页面自动跳转到对应的内容部分
-    let aTags = document.querySelectorAll('nav.menu > ul > li > a')
-    for(let i = 0; i < aTags.length; i++){
-        aTags[i].onclick = function(x){
-            x.preventDefault()
-            let a = x.currentTarget
-            let href = a.getAttribute('href')
-            let currentA = document.querySelector(href)
-
-            // 通过js实现慢慢的移动(下面是通过引入了一个tween库来进行缓动)
-            let currentTop = window.scrollY
-            let targetTop = currentA.offsetTop - 80
-
-            // 下面是设置运动的时间是根据距离的改变而发生改变的
-            // 没100像素移动的时间是300ms，当总的运动时间大于500ms时就设置为500ms
-            let distance = targetTop - currentTop
-            let time = Math.abs((distance/100)*300)
-            if(time>500){ time = 500 }
-
-            const coords = { y: currentTop }; 
-            const tween = new TWEEN.Tween(coords) 
-                    .to({ y: targetTop }, time) 
-                    .easing(TWEEN.Easing.Quadratic.InOut) 
-                    .onUpdate(() => { 
-                        window.scrollTo(0,coords.y)
-                    })
-                    .start();
-        }
-    }
-</script>
+    <script src="./js/init-swiper.js"></script>
+    <script src="./js/sticky-topNavBar.js"></script>
+    <script src="./js/auto-slide-up.js"></script>
+    <script src="./js/smoothly-navigation.js"></script>
     
 </body>
 </html>

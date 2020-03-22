@@ -3,28 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./a.css">
+    
     <link rel="stylesheet" href="./loading.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <link rel="stylesheet" href="./a.css">
     <script src="//at.alicdn.com/t/font_881797_9ahi3eg5y0k.js"></script>
     <style type="text/css">
-        .icon {
-           width: 1em; height: 1em;
-           vertical-align: -0.15em;
-           fill: currentColor;
-           overflow: hidden;
-        }
-        .set-welcome{
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #888;
-            z-index: 2;
-            justify-content: center;
-            align-items: center;
-        }
-        .set-welcome.active{
-            display: flex;
-        }
+        .icon { width: 1em; height: 1em; vertical-align: -0.15em; fill: currentColor; overflow: hidden; }
+        .set-welcome{ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #888; z-index: 2; justify-content: center; align-items: center; }
+        .set-welcome.active{ display: flex; }
     </style>
     <title>个人简历</title>
 </head>
@@ -61,9 +48,11 @@
             </nav>
         </div>
     </div>
+    
     <div class="banner">
         <div class="mask"></div>
     </div>
+    
     <main>
         <div data-x id="siteAbout" class="userCard">
              <div class="pictureAndText clearfix">
@@ -161,43 +150,41 @@
     </section>
     <section data-x id="siteWorks" class="portfolio">
         <h2>作品集</h2>
-        <nav>
-            <ol class="clearfix">
-                <li id="portfolio1">所有</li>
-                <li id="portfolio2">框架</li>
-                <li id="portfolio3">原声JS&amp;CSS</li>
-            </ol>
-            <div id="portfolioBar" class="bar status-1">
-                <div class="bar-inner"></div>
+
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <img src="./img/works/nav-page.jpg" class="swiper-slide" alt="#">
+                <img src="./img/works/canvas.jpg" class="swiper-slide" alt="#">
+                <img src="./img/works/apple-style-slides.jpg" class="swiper-slide" alt="#">
             </div>
-        </nav>
-        <script>
-            portfolio1.onclick = function(){
-                portfolioBar.className = "bar status-1";
-                console.log(123)
-            }
-            portfolio2.onclick = function(){
-                portfolioBar.className = "bar status-2";
-                console.log(456)
-            }
-            portfolio3.onclick = function(){
-                portfolioBar.className = "bar status-3";
-                console.log(789)
-            }
-        </script>
-        <div class="works" style="height: 597px">
-            <div class="big" style="top: 0; left: 0;">
-                <img src="./img/1.jpg" alt="作品1">
-            </div>
-            <div class="small" style="top: 0; left: 645px;">
-                <img src="./img/2.jpg" alt="作品2">
-            </div>
-            <div class="small" style="top: 312px; left: 645px;">
-                <img src="./img/2.jpg" alt="作品3">
-            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
         </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </section>
     <script src="https://cdn.bootcss.com/tween.js/17.2.0/Tween.min.js"></script>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    <script>
+          var mySwiper = new Swiper ('.swiper-container', {
+            // Optional parameters
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+            el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            }
+        })
+    </script>
 <script>
     let specialTags = document.querySelectorAll('[data-x]')
     for(let i = 0;i<specialTags.length;i++){
